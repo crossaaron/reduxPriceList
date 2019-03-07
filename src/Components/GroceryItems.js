@@ -32,7 +32,7 @@ export default class GroceryItems extends Component {
                             return (
                                 <tr key={index}>
                                     <td>
-                                        <button>
+                                        <button onClick={() => this.props.addToCart(item)}>
                                             Add to Cart
                                         </button>
                                     </td>
@@ -43,10 +43,6 @@ export default class GroceryItems extends Component {
                         })}
                     </tbody>
                 </table>
-
-                <p>
-                    Total: $0.00
-                </p>
             </div>
         )
 

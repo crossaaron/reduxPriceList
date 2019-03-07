@@ -25627,6 +25627,8 @@ function (_Component) {
   _createClass(GroceryItems, [{
     key: "render",
     value: function render() {
+      var _this = this;
+
       return _react.default.createElement("div", {
         id: "grocery-items"
       }, _react.default.createElement("table", {
@@ -25634,8 +25636,12 @@ function (_Component) {
       }, _react.default.createElement("tbody", null, _react.default.createElement("tr", null, _react.default.createElement("th", null, "ItemPrice"), _react.default.createElement("th", null, "Item Name")), GROCERY_ITEMS.map(function (item, index) {
         return _react.default.createElement("tr", {
           key: index
-        }, _react.default.createElement("td", null, _react.default.createElement("button", null, "Add to Cart")), _react.default.createElement("td", null, item.price), _react.default.createElement("td", null, item.name));
-      }))), _react.default.createElement("p", null, "Total: $0.00"));
+        }, _react.default.createElement("td", null, _react.default.createElement("button", {
+          onClick: function onClick() {
+            return _this.props.addToCart(item);
+          }
+        }, "Add to Cart")), _react.default.createElement("td", null, item.price), _react.default.createElement("td", null, item.name));
+      }))));
     }
   }]);
 
@@ -25685,9 +25691,18 @@ function (_Component) {
   }
 
   _createClass(GroceryCart, [{
+    key: "total",
+    value: function total() {
+      return this.props.items.reduce(function (total, item) {
+        return total + item.price;
+      }, 0);
+    }
+  }, {
     key: "render",
     value: function render() {
-      if (this.props.items) {
+      var _this = this;
+
+      if (this.props.items.length === 0) {
         return _react.default.createElement("div", {
           id: "grocery-cart"
         }, _react.default.createElement("p", null, "Cart is Empty"));
@@ -25697,11 +25712,15 @@ function (_Component) {
         id: "grocery-cart"
       }, _react.default.createElement("table", {
         border: "1"
-      }, _react.default.createElement("tbody", null, _react.default.createElement("tr", null, _react.default.createElement("th", null, "ItemPrice"), _react.default.createElement("th", null, "Item Name")), this.props.items.map(function (item, index) {
+      }, _react.default.createElement("tbody", null, _react.default.createElement("tr", null, _react.default.createElement("th", null), _react.default.createElement("th", null, "ItemPrice"), _react.default.createElement("th", null, "Item Name")), this.props.items.map(function (item, index) {
         return _react.default.createElement("tr", {
-          id: index
-        }, _react.default.createElement("td", null, _react.default.createElement("button", null, "Add to Cart")), _react.default.createElement("td", null, item.price), _react.default.createElement("td", null, item.name));
-      }))));
+          key: index
+        }, _react.default.createElement("td", null, _react.default.createElement("button", {
+          onClick: function onClick() {
+            return _this.props.removeFromCart(index);
+          }
+        }, "Remove Cart")), _react.default.createElement("td", null, item.price), _react.default.createElement("td", null, item.name));
+      }))), _react.default.createElement("p", null, "Total: $", this.total()));
     }
   }]);
 
@@ -25729,6 +25748,14 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -25737,9 +25764,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
@@ -25759,18 +25786,41 @@ function (_Component) {
     _this.state = {
       cart: []
     };
+    _this.addToCart = _this.addToCart.bind(_assertThisInitialized(_this));
+    _this.removeFromCart = _this.removeFromCart.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(App, [{
+    key: "addToCart",
+    value: function addToCart(item) {
+      var cart = [].concat(_toConsumableArray(this.state.cart), [item]);
+      this.setState({
+        cart: cart
+      });
+    }
+  }, {
+    key: "removeFromCart",
+    value: function removeFromCart(index) {
+      var cart = _toConsumableArray(this.state.cart);
+
+      cart.splice(index, 1);
+      this.setState({
+        cart: cart
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
       return _react.default.createElement("div", {
         id: "app-container"
       }, _react.default.createElement("h1", null, "Grocery Cart"), _react.default.createElement("div", {
         id: "grocery-container"
-      }, _react.default.createElement(_GroceryItems.default, null), _react.default.createElement(_GroceryCart.default, {
-        items: this.state.cart
+      }, _react.default.createElement(_GroceryItems.default, {
+        addToCart: this.addToCart
+      }), _react.default.createElement(_GroceryCart.default, {
+        items: this.state.cart,
+        removeFromCart: this.removeFromCart
       })));
     }
   }]);
@@ -25892,7 +25942,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61677" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56936" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
