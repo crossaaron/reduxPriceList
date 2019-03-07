@@ -25633,7 +25633,7 @@ function (_Component) {
         border: "1"
       }, _react.default.createElement("tbody", null, _react.default.createElement("tr", null, _react.default.createElement("th", null, "ItemPrice"), _react.default.createElement("th", null, "Item Name")), GROCERY_ITEMS.map(function (item, index) {
         return _react.default.createElement("tr", {
-          id: index
+          key: index
         }, _react.default.createElement("td", null, _react.default.createElement("button", null, "Add to Cart")), _react.default.createElement("td", null, item.price), _react.default.createElement("td", null, item.name));
       }))));
     }
@@ -25892,7 +25892,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62767" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60426" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);

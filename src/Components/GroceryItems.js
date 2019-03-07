@@ -30,7 +30,7 @@ export default class GroceryItems extends Component {
                         </tr>
                         {GROCERY_ITEMS.map((item, index) => {
                             return (
-                                <tr id={index}>
+                                <tr key={index}>
                                     <td>
                                         <button>
                                             Add to Cart
