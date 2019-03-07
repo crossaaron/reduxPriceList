@@ -43,6 +43,10 @@ export default class GroceryItems extends Component {
                         })}
                     </tbody>
                 </table>
+
+                <p>
+                    Total: $0.00
+                </p>
             </div>
         )
 

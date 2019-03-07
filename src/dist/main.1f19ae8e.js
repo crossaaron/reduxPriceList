@@ -25635,7 +25635,7 @@ function (_Component) {
         return _react.default.createElement("tr", {
           key: index
         }, _react.default.createElement("td", null, _react.default.createElement("button", null, "Add to Cart")), _react.default.createElement("td", null, item.price), _react.default.createElement("td", null, item.name));
-      }))));
+      }))), _react.default.createElement("p", null, "Total: $0.00"));
     }
   }]);
 
@@ -25767,7 +25767,7 @@ function (_Component) {
     value: function render() {
       return _react.default.createElement("div", {
         id: "app-container"
-      }, _react.default.createElement("h1", null, "React Template"), _react.default.createElement("p", null, " Magic starts here"), _react.default.createElement("div", {
+      }, _react.default.createElement("h1", null, "Grocery Cart"), _react.default.createElement("div", {
         id: "grocery-container"
       }, _react.default.createElement(_GroceryItems.default, null), _react.default.createElement(_GroceryCart.default, {
         items: this.state.cart
@@ -25851,7 +25851,7 @@ var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
-},{"_css_loader":"../../../../.config/yarn/global/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"main.js":[function(require,module,exports) {
+},{"./background.jpg":[["background.9e15dd99.jpg","background.jpg"],"background.jpg"],"_css_loader":"../../../../.config/yarn/global/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"main.js":[function(require,module,exports) {
 "use strict";
 
 var _react = _interopRequireDefault(require("react"));
@@ -25892,7 +25892,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60426" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61677" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);

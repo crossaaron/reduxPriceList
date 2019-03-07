@@ -1,5 +1,7 @@
 body {
-    background-color: darkgreen;
+    background-image: url('background.9e15dd99.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 #app-container {

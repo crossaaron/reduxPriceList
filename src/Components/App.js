@@ -14,8 +14,7 @@ export default class App extends Component {
     render() {
         return (
             <div id='app-container'>
-                <h1>React Template</h1>
-                <p> Magic starts here</p>
+                <h1>Grocery Cart</h1>
                 <div id='grocery-container'>
                     <GroceryItems />
                     <GroceryCart items={this.state.cart} />
