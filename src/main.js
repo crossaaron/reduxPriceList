@@ -4,4 +4,14 @@ import ReactDOM from  'react-dom'
 import App from './Components/App'
 import './style.css'
 
-ReactDOM.render(<App />, document.getElementById('root'));
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
+import cartReducer from './reducers/cart-reducer'
+
+const store = createStore(cartReducer);
+
+ReactDOM.render(
+        <Provider store={store}>
+            <App />
+        </Provider>
+    , document.getElementById('root'));
