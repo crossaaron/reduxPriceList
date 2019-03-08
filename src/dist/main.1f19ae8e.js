@@ -28508,6 +28508,83 @@ function mapDispatchToProps(dispatch) {
 var _default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(GroceryCart);
 
 exports.default = _default;
+},{"react":"node_modules/react/index.js","react-redux":"node_modules/react-redux/es/index.js"}],"Components/History.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireWildcard(require("react"));
+
+var _reactRedux = require("react-redux");
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
+
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+var History =
+/*#__PURE__*/
+function (_Component) {
+  _inherits(History, _Component);
+
+  function History() {
+    _classCallCheck(this, History);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(History).apply(this, arguments));
+  }
+
+  _createClass(History, [{
+    key: "render",
+    value: function render() {
+      return _react.default.createElement("div", {
+        id: "history-controls"
+      }, _react.default.createElement("button", {
+        onClick: this.props.undo
+      }, "undo"), _react.default.createElement("button", {
+        onClick: this.props.redo
+      }, "redo"));
+    }
+  }]);
+
+  return History;
+}(_react.Component);
+
+function mapDispatchToProps(dispatch) {
+  return {
+    undo: function undo() {
+      return dispatch({
+        type: 'UNDO'
+      });
+    },
+    redo: function redo() {
+      return dispatch({
+        type: 'REDO'
+      });
+    }
+  };
+}
+
+var _default = (0, _reactRedux.connect)(null, mapDispatchToProps)(History);
+
+exports.default = _default;
 },{"react":"node_modules/react/index.js","react-redux":"node_modules/react-redux/es/index.js"}],"Components/App.js":[function(require,module,exports) {
 "use strict";
 
@@ -28521,6 +28598,8 @@ var _react = _interopRequireWildcard(require("react"));
 var _GroceryItems = _interopRequireDefault(require("./GroceryItems"));
 
 var _GroceryCart = _interopRequireDefault(require("./GroceryCart"));
+
+var _History = _interopRequireDefault(require("./History"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -28560,7 +28639,7 @@ function (_Component) {
     value: function render() {
       return _react.default.createElement("div", {
         id: "app-container"
-      }, _react.default.createElement("h1", null, "Grocery Cart"), _react.default.createElement("div", {
+      }, _react.default.createElement("h1", null, "Grocery Cart"), _react.default.createElement(_History.default, null), _react.default.createElement("div", {
         id: "grocery-container"
       }, _react.default.createElement(_GroceryItems.default, null), _react.default.createElement(_GroceryCart.default, null)));
     }
@@ -28570,7 +28649,7 @@ function (_Component) {
 }(_react.Component);
 
 exports.default = App;
-},{"react":"node_modules/react/index.js","./GroceryItems":"Components/GroceryItems.js","./GroceryCart":"Components/GroceryCart.js"}],"../../../../.config/yarn/global/node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","./GroceryItems":"Components/GroceryItems.js","./GroceryCart":"Components/GroceryCart.js","./History":"Components/History.js"}],"../../../../.config/yarn/global/node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
 var bundleURL = null;
 
 function getBundleURLCached() {
@@ -28650,10 +28729,6 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
@@ -28661,6 +28736,10 @@ function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread n
 function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
 
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 var GROCERY_ITEMS = [{
   name: 'Sliced bacon',
@@ -28715,16 +28794,49 @@ var cartReducer = function cartReducer(state, action) {
   if (state === undefined) {
     return {
       forSale: GROCERY_ITEMS,
-      cart: []
+      cart: [],
+      history: [[]],
+      historyIndex: 0
     };
   }
 
   switch (action.type) {
+    case 'UNDO':
+      {
+        var historyIndex = state.historyIndex - 1;
+        historyIndex = Math.max(historyIndex, 0);
+        return _objectSpread({}, state, {
+          cart: state.history[historyIndex],
+          historyIndex: historyIndex
+        });
+      }
+
+    case 'REDO':
+      {
+        var _historyIndex = state.historyIndex + 1;
+
+        _historyIndex = Math.min(_historyIndex, state.history.length - 1);
+        return _objectSpread({}, state, {
+          cart: state.history[_historyIndex],
+          historyIndex: _historyIndex
+        });
+      }
+
     case 'ADD_TO_CART':
       {
         var cart = [].concat(_toConsumableArray(state.cart), [action.item]);
+
+        var history = _toConsumableArray(state.history);
+
+        history.splice(state.historyIndex + 1, state.history.length);
+        history.push(cart);
+
+        var _historyIndex2 = history.length - 1;
+
         return _objectSpread({}, state, {
-          cart: cart
+          cart: cart,
+          history: history,
+          historyIndex: _historyIndex2
         });
       }
 
@@ -28734,8 +28846,18 @@ var cartReducer = function cartReducer(state, action) {
 
         _cart.splice(action.index, 1);
 
+        var _history = _toConsumableArray(state.history);
+
+        _history.splice(state.historyIndex + 1, state.history.length);
+
+        _history.push(_cart);
+
+        var _historyIndex3 = _history.length - 1;
+
         return _objectSpread({}, state, {
-          cart: _cart
+          cart: _cart,
+          history: _history,
+          historyIndex: _historyIndex3
         });
       }
 
@@ -28799,7 +28921,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52315" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56797" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
