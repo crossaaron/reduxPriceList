@@ -28649,6 +28649,19 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
 var GROCERY_ITEMS = [{
   name: 'Sliced bacon',
   price: 3.66
@@ -28697,6 +28710,8 @@ var GROCERY_ITEMS = [{
 }];
 
 var cartReducer = function cartReducer(state, action) {
+  console.log('action:', action);
+
   if (state === undefined) {
     return {
       forSale: GROCERY_ITEMS,
@@ -28706,10 +28721,23 @@ var cartReducer = function cartReducer(state, action) {
 
   switch (action.type) {
     case 'ADD_TO_CART':
-      {}
+      {
+        var cart = [].concat(_toConsumableArray(state.cart), [action.item]);
+        return _objectSpread({}, state, {
+          cart: cart
+        });
+      }
 
     case 'REMOVE_FROM_CART':
-      {}
+      {
+        var _cart = _toConsumableArray(state.cart);
+
+        _cart.splice(action.index, 1);
+
+        return _objectSpread({}, state, {
+          cart: _cart
+        });
+      }
 
     default:
       {
@@ -28771,7 +28799,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49492" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52315" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);

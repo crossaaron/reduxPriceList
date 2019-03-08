@@ -18,7 +18,7 @@ const GROCERY_ITEMS = [
 
 
 const cartReducer = (state, action) => {
-    const
+    console.log('action:', action);
     if (state === undefined) {
         return {
             forSale: GROCERY_ITEMS,
@@ -28,10 +28,19 @@ const cartReducer = (state, action) => {
 
     switch (action.type) {
         case 'ADD_TO_CART': {
-
+            const cart = [...state.cart, action.item];
+            return {
+                ...state,
+                cart
+            }
         }
         case 'REMOVE_FROM_CART': {
-
+            const cart = [...state.cart];
+            cart.splice(action.index, 1);
+            return {
+                ...state,
+                cart
+            }
         }
         default: {
             return state;
