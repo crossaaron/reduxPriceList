@@ -28321,7 +28321,52 @@ var _Context = require("./components/Context");
 var _connect = _interopRequireDefault(require("./connect/connect"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-},{"./components/Provider":"node_modules/react-redux/es/components/Provider.js","./components/connectAdvanced":"node_modules/react-redux/es/components/connectAdvanced.js","./components/Context":"node_modules/react-redux/es/components/Context.js","./connect/connect":"node_modules/react-redux/es/connect/connect.js"}],"Components/GroceryItems.js":[function(require,module,exports) {
+},{"./components/Provider":"node_modules/react-redux/es/components/Provider.js","./components/connectAdvanced":"node_modules/react-redux/es/components/connectAdvanced.js","./components/Context":"node_modules/react-redux/es/components/Context.js","./connect/connect":"node_modules/react-redux/es/connect/connect.js"}],"reducers/action.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.undo = undo;
+exports.redo = redo;
+exports.addToCart = addToCart;
+exports.removeFromCart = removeFromCart;
+exports.REMOVE_FROM_CART = exports.ADD_TO_CART = exports.REDO = exports.UNDO = void 0;
+var UNDO = 'UNDO';
+exports.UNDO = UNDO;
+var REDO = 'REDO';
+exports.REDO = REDO;
+var ADD_TO_CART = 'ADD_TO_CART';
+exports.ADD_TO_CART = ADD_TO_CART;
+var REMOVE_FROM_CART = 'REMOVE_FROM_CART';
+exports.REMOVE_FROM_CART = REMOVE_FROM_CART;
+
+function undo() {
+  return {
+    type: UNDO
+  };
+}
+
+function redo() {
+  return {
+    type: REDO
+  };
+}
+
+function addToCart(item) {
+  return {
+    type: ADD_TO_CART,
+    item: item
+  };
+}
+
+function removeFromCart(index) {
+  return {
+    type: REMOVE_FROM_CART,
+    index: index
+  };
+}
+},{}],"Components/GroceryItems.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -28332,6 +28377,8 @@ exports.default = void 0;
 var _react = _interopRequireWildcard(require("react"));
 
 var _reactRedux = require("react-redux");
+
+var _action = require("../reducers/action");
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
 
@@ -28391,10 +28438,7 @@ function (_Component) {
 function mapDispatchToProps(dispatch) {
   return {
     addToCart: function addToCart(item) {
-      dispatch({
-        type: 'ADD_TO_CART',
-        item: item
-      });
+      dispatch((0, _action.addToCart)(item));
     }
   };
 }
@@ -28408,7 +28452,7 @@ function mapStateToProps(state) {
 var _default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(GroceryItems);
 
 exports.default = _default;
-},{"react":"node_modules/react/index.js","react-redux":"node_modules/react-redux/es/index.js"}],"Components/GroceryCart.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","react-redux":"node_modules/react-redux/es/index.js","../reducers/action":"reducers/action.js"}],"Components/GroceryCart.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -28419,6 +28463,8 @@ exports.default = void 0;
 var _react = _interopRequireWildcard(require("react"));
 
 var _reactRedux = require("react-redux");
+
+var _action = require("../reducers/action");
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
 
@@ -28497,10 +28543,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     removeFromCart: function removeFromCart(index) {
-      dispatch({
-        type: 'REMOVE_FROM_CART',
-        index: index
-      });
+      dispatch((0, _action.removeFromCart)(index));
     }
   };
 }
@@ -28508,7 +28551,7 @@ function mapDispatchToProps(dispatch) {
 var _default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(GroceryCart);
 
 exports.default = _default;
-},{"react":"node_modules/react/index.js","react-redux":"node_modules/react-redux/es/index.js"}],"Components/History.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","react-redux":"node_modules/react-redux/es/index.js","../reducers/action":"reducers/action.js"}],"Components/History.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -28519,6 +28562,8 @@ exports.default = void 0;
 var _react = _interopRequireWildcard(require("react"));
 
 var _reactRedux = require("react-redux");
+
+var _action = require("../reducers/action");
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
 
@@ -28570,14 +28615,10 @@ function (_Component) {
 function mapDispatchToProps(dispatch) {
   return {
     undo: function undo() {
-      return dispatch({
-        type: 'UNDO'
-      });
+      return dispatch((0, _action.undo)());
     },
     redo: function redo() {
-      return dispatch({
-        type: 'REDO'
-      });
+      return dispatch((0, _action.redo)());
     }
   };
 }
@@ -28585,7 +28626,7 @@ function mapDispatchToProps(dispatch) {
 var _default = (0, _reactRedux.connect)(null, mapDispatchToProps)(History);
 
 exports.default = _default;
-},{"react":"node_modules/react/index.js","react-redux":"node_modules/react-redux/es/index.js"}],"Components/App.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","react-redux":"node_modules/react-redux/es/index.js","../reducers/action":"reducers/action.js"}],"Components/App.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -28729,6 +28770,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
+var _action = require("./action.js");
+
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
@@ -28801,7 +28844,7 @@ var cartReducer = function cartReducer(state, action) {
   }
 
   switch (action.type) {
-    case 'UNDO':
+    case _action.UNDO:
       {
         var historyIndex = state.historyIndex - 1;
         historyIndex = Math.max(historyIndex, 0);
@@ -28811,7 +28854,7 @@ var cartReducer = function cartReducer(state, action) {
         });
       }
 
-    case 'REDO':
+    case _action.REDO:
       {
         var _historyIndex = state.historyIndex + 1;
 
@@ -28822,7 +28865,7 @@ var cartReducer = function cartReducer(state, action) {
         });
       }
 
-    case 'ADD_TO_CART':
+    case _action.ADD_TO_CART:
       {
         var cart = [].concat(_toConsumableArray(state.cart), [action.item]);
 
@@ -28840,7 +28883,7 @@ var cartReducer = function cartReducer(state, action) {
         });
       }
 
-    case 'REMOVE_FROM_CART':
+    case _action.REMOVE_FROM_CART:
       {
         var _cart = _toConsumableArray(state.cart);
 
@@ -28870,7 +28913,7 @@ var cartReducer = function cartReducer(state, action) {
 
 var _default = cartReducer;
 exports.default = _default;
-},{}],"main.js":[function(require,module,exports) {
+},{"./action.js":"reducers/action.js"}],"main.js":[function(require,module,exports) {
 "use strict";
 
 var _react = _interopRequireDefault(require("react"));
@@ -28921,7 +28964,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56797" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55331" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-
+import { addToCart } from "../reducers/action";
 
 class GroceryItems extends Component {
     render() {
@@ -36,10 +36,9 @@ class GroceryItems extends Component {
 function mapDispatchToProps(dispatch) {
     return {
         addToCart: (item) => {
-            dispatch({
-                type: 'ADD_TO_CART',
-                item
-            })
+            dispatch(
+                addToCart(item)
+            )
         }
     }
 }

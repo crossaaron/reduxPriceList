@@ -16,6 +16,7 @@ const GROCERY_ITEMS = [
     {name: 'Ice cream',	price: 3.95},
 ];
 
+import { UNDO, REDO, REMOVE_FROM_CART, ADD_TO_CART } from './action.js';
 
 const cartReducer = (state, action) => {
     console.log('action:', action);
@@ -29,7 +30,7 @@ const cartReducer = (state, action) => {
     }
 
     switch (action.type) {
-        case 'UNDO': {
+        case UNDO: {
             let historyIndex = state.historyIndex - 1;
             historyIndex = Math.max(historyIndex, 0);
 
@@ -40,7 +41,7 @@ const cartReducer = (state, action) => {
             }
         }
 
-        case 'REDO': {
+        case REDO: {
             let historyIndex = state.historyIndex + 1;
             historyIndex = Math.min(historyIndex, state.history.length -1);
 
@@ -51,7 +52,7 @@ const cartReducer = (state, action) => {
             }
         }
 
-        case 'ADD_TO_CART': {
+        case ADD_TO_CART: {
             const cart = [...state.cart, action.item];
 
             const history = [...state.history];
@@ -67,7 +68,7 @@ const cartReducer = (state, action) => {
                 historyIndex
             }
         }
-        case 'REMOVE_FROM_CART': {
+        case REMOVE_FROM_CART: {
             const cart = [...state.cart];
             cart.splice(action.index, 1);
 
